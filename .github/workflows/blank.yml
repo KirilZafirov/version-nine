@@ -1,33 +1,31 @@
 # This is a basic workflow to help you get started with Actions
 
-name: CI Deploy to GitHub Pages
+name: Build and Deploy
 
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the master branch
 on:
   push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+    branches: 
+      - master
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
-  build:
-    # The type of runner that the job will run on
+  build-and-deploy:
     runs-on: ubuntu-latest
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - name: Checkout
-      uses: actions/checkout@v2
-      with: 
-        persist-credentials: false
-    - name: Use Node.js 10.x
-      uses: actions/setup-node@v1
+      uses: actions/checkout@v1
+    - uses: actions/setup-node@v1
       with:
         node-version: '10.x'
+    - uses: actions/cache@v1 # this allows for re-using node_modules caching, making builds a bit faster
+      with:
+        path: ~/.npm
+        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-node-
     # Runs a single command using the runners shell
     - name: Build
       run: |
@@ -37,7 +35,7 @@ jobs:
 
     # Runs a set of commands using the runners shell
     - name: Deploy
-      uses: JamesIves/github-pages-deploy-action@releases/v2
+      uses: JamesIves/github-pages-deploy-action@releases/v3
       env:
         ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         BASE_BRANCH: master
