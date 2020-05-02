@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve -o",
     "server": "http-server -p 8080 -c-1 dist/version-nine",
+    "deploy" :"ng build --prod --base-href=/version-nine/",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
