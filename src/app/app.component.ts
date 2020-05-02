@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { environment } from 'src/environments/environment';
+import { environment } from 'src/environments/environment'; 
 
 @Component({
   selector: 'app-root',
@@ -7,12 +7,11 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'version-nine';
-
+  title = 'version-nine'; 
   public get environmentName() {
     return environment.environment;
   }
-  ngOnInit(): void {
+  ngOnInit(): void { 
     console.log(this.environmentName)
-  }
+  }  
 }

@@ -5,47 +5,12 @@
   <title>VersionNine</title>
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
-  <style>
-      .grid-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
-    grid-template-areas: "Navigation Navigation Navigation Navigation" "Main-COntent Main-COntent Main-COntent Side-Content" "Main-COntent Main-COntent Main-COntent Side-Content";
-  }
-
-  .Side-Content { grid-area: Side-Content; }
-
-  .Navigation {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
-    grid-template-areas: "One . ." ". . .";
-    grid-area: Navigation;
-  }
-
-  .One { grid-area: One; }
-
-  .Main-COntent { grid-area: Main-COntent; }
-  </style>
-  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" type="image/x-icon" href="favicon.ico" async> 
+  <link rel="manifest" href="manifest.webmanifest" async>
   <meta name="theme-color" content="#1976d2">
 </head>
 <body>
-  <app-root>
-    <div class="grid-container">
-      <div class="Side-Content">
-        Side Content
-      </div>
-      <div class="Navigation">
-        <div class="One">
-          One
-        </div>
-      </div>
-      <div class="Main-COntent">
-        Main Content
-      </div>
-    </div>
+  <app-root> 
   </app-root>
   <noscript>Please enable JavaScript to continue using this application.</noscript>
 </body>
