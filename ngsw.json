@@ -1,24 +1,29 @@
 {
   "configVersion": 1,
-  "timestamp": 1596523909661,
+  "timestamp": 1597761518870,
   "index": "/version-nine/index.html",
   "assetGroups": [
     {
       "name": "app",
       "installMode": "prefetch",
       "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
       "urls": [
-        "/version-nine/1-es2015.043bb1e928e3e079e3ab.js",
-        "/version-nine/1-es5.043bb1e928e3e079e3ab.js",
+        "/version-nine/5-es2015.325edb716b0cb2dbc559.js",
+        "/version-nine/5-es5.325edb716b0cb2dbc559.js",
+        "/version-nine/6-es2015.87b5295bbaa9a45fe62b.js",
+        "/version-nine/6-es5.87b5295bbaa9a45fe62b.js",
         "/version-nine/favicon.ico",
         "/version-nine/index.html",
-        "/version-nine/main-es2015.19ad82b2d6d27c483ab9.js",
-        "/version-nine/main-es5.19ad82b2d6d27c483ab9.js",
+        "/version-nine/main-es2015.70cb9146196f86789398.js",
+        "/version-nine/main-es5.70cb9146196f86789398.js",
         "/version-nine/manifest.webmanifest",
-        "/version-nine/polyfills-es2015.0ed4e5313a48d5aed4f8.js",
-        "/version-nine/polyfills-es5.64f441b98920fb39c7a4.js",
-        "/version-nine/runtime-es2015.edaf9a3343ee1264900b.js",
-        "/version-nine/runtime-es5.edaf9a3343ee1264900b.js",
+        "/version-nine/polyfills-es2015.a0fa45e0fa52702b64f0.js",
+        "/version-nine/polyfills-es5.ad488d10aedb20ee68c9.js",
+        "/version-nine/runtime-es2015.2e300450a24f7c3b80a2.js",
+        "/version-nine/runtime-es5.2e300450a24f7c3b80a2.js",
         "/version-nine/styles.3ff695c00d717f2d2a11.css"
       ],
       "patterns": []
@@ -27,6 +32,9 @@
       "name": "assets",
       "installMode": "lazy",
       "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
       "urls": [
         "/version-nine/assets/app-config.json",
         "/version-nine/assets/icons/icon-128x128.png",
@@ -43,8 +51,10 @@
   ],
   "dataGroups": [],
   "hashTable": {
-    "/version-nine/1-es2015.043bb1e928e3e079e3ab.js": "0401c53a8609b2083da8ff18f48ce9b8f388a3d4",
-    "/version-nine/1-es5.043bb1e928e3e079e3ab.js": "fdaeeef64ad18d2bc689db12dcd9461915a7833e",
+    "/version-nine/5-es2015.325edb716b0cb2dbc559.js": "e672f7ca2daf08120f0d1b6302d7857eb6762aff",
+    "/version-nine/5-es5.325edb716b0cb2dbc559.js": "d014336b9ec07de4387ceb5c0e81dc8f8c41b136",
+    "/version-nine/6-es2015.87b5295bbaa9a45fe62b.js": "d08448c1cecbf8d1f29ac8681ee518e7126fa03b",
+    "/version-nine/6-es5.87b5295bbaa9a45fe62b.js": "4e1a1cc200e4058ff291e65fd92eaea2cb73a835",
     "/version-nine/assets/app-config.json": "2456d5ec39b50f78afc7f41cdad63b26f3e2d1b6",
     "/version-nine/assets/icons/icon-128x128.png": "dae3b6ed49bdaf4327b92531d4b5b4a5d30c7532",
     "/version-nine/assets/icons/icon-144x144.png": "b0bd89982e08f9bd2b642928f5391915b74799a7",
@@ -55,14 +65,14 @@
     "/version-nine/assets/icons/icon-72x72.png": "c457e56089a36952cd67156f9996bc4ce54a5ed9",
     "/version-nine/assets/icons/icon-96x96.png": "3914125a4b445bf111c5627875fc190f560daa41",
     "/version-nine/favicon.ico": "22f6a4a3bcaafafb0254e0f2fa4ceb89e505e8b2",
-    "/version-nine/index.html": "76b4748bedf8ea38339814791aa0109449d09104",
-    "/version-nine/main-es2015.19ad82b2d6d27c483ab9.js": "e5726b96e19b2f39c2ac0074ddd69afe534b2ad6",
-    "/version-nine/main-es5.19ad82b2d6d27c483ab9.js": "919dafb885c51af2f1bf6bc2810e6e2c62a8fb69",
+    "/version-nine/index.html": "5fc58a4ff4e548aeec9e8e3f74437d5390243a31",
+    "/version-nine/main-es2015.70cb9146196f86789398.js": "3c43f159f7bc5989178981153850065e1367ca87",
+    "/version-nine/main-es5.70cb9146196f86789398.js": "90bf4d13eb050415d4bca09e2d9e489a070492fb",
     "/version-nine/manifest.webmanifest": "bc66577366cfd444f851b98d7198afa201758d08",
-    "/version-nine/polyfills-es2015.0ed4e5313a48d5aed4f8.js": "15a133b6cbb459a66fcd2e75f6aa25782e5d79c4",
-    "/version-nine/polyfills-es5.64f441b98920fb39c7a4.js": "6fb9b275d5f1484215fde72ba3f10480fa9692a8",
-    "/version-nine/runtime-es2015.edaf9a3343ee1264900b.js": "78aff6b02eafa4afe6fb9275a9484bca569c05bf",
-    "/version-nine/runtime-es5.edaf9a3343ee1264900b.js": "c780aec63fb3a89c1643a7071182e8f40398cdf0",
+    "/version-nine/polyfills-es2015.a0fa45e0fa52702b64f0.js": "72ad4ccc0a3916ae4598199447cdeadd6d380570",
+    "/version-nine/polyfills-es5.ad488d10aedb20ee68c9.js": "ff14d90e08622190714660721edab5f43578829a",
+    "/version-nine/runtime-es2015.2e300450a24f7c3b80a2.js": "c36921e2744035610f5a2d4cad76c5bd18e8d788",
+    "/version-nine/runtime-es5.2e300450a24f7c3b80a2.js": "40f8409061efe68753a662f26e5d8493eb168cea",
     "/version-nine/styles.3ff695c00d717f2d2a11.css": "da39a3ee5e6b4b0d3255bfef95601890afd80709"
   },
   "navigationUrls": [
