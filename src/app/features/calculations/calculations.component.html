@@ -15,11 +15,11 @@
                 <th scope="col" class="btn-action"></th>
               </tr>
           <tr class="bg-info"> 
-            <th scope="col">#</th>
+            <th scope="col">#</th> 
             <th scope="col">Вид и опис на стока</th> 
-            <th scope="col">Един.Мерка и количина </th>
-            <th scope="col">Единечна Цена без ддв.</th>
             <th scope="col">вкупна количина по Един.Мерка</th>
+            <th scope="col">Един.Мерка и количина </th>
+            <th scope="col">Единечна Цена без ддв.</th> 
             <th scope="col">стапка на ддв (5%/18%)</th> 
             <th scope="col">Вкупна цена без ддв</th> 
             <th scope="col">Вкупно ддв</th> 
@@ -35,6 +35,12 @@
                         title="Предмет на набавката односно опис на стоката која се побарува и можеби состави или грамажа"
                         placeholder="Предмет на набавка" class="form-control"/> 
                     </td>  
+                    <td class="align-middle">
+                        <input type="number" formControlName="totalRequired" placeholder="вкупна побарана количина од производ" class="form-control" 
+                        title="вкупна побарана количина од производ.Пример за литар Млеко се пишува 60 автоматски се пресметува во литри"
+                         onkeydown="return event.keyCode !== 69"
+                         required/> 
+                    </td> 
                     <td class="align-middle" >  
                             <select id="measureAndAmount" 
                                     class="form-control" 
@@ -56,13 +62,7 @@
                         class="form-control" 
                          onkeydown="return event.keyCode !== 69"
                          required/> 
-                    </td> 
-                    <td class="align-middle">
-                        <input type="number" formControlName="totalRequired" placeholder="вкупна побарана количина од производ" class="form-control" 
-                        title="вкупна побарана количина од производ.Пример за литар Млеко се пишува 60 автоматски се пресметува во литри"
-                         onkeydown="return event.keyCode !== 69"
-                         required/> 
-                    </td> 
+                    </td>  
                     <td class="align-middle"> 
                         <select id="ddvRate" 
                         title="Стапката на ддв по која треба да се пресмета овој производ"
@@ -99,9 +99,7 @@
                         </button> 
                     </td> 
                   </tr>  
-            </ng-container >  
-            
-                <ng-container *ngIf="result$ | async as result">
+            </ng-container> 
                     <tr class="list-group list-group-flush">  
                    
                         <td class="align-middle">
@@ -117,19 +115,64 @@
                                 
                         </td> 
                         <td class="align-middle">
-                            Вкупна цена без ддв
+                            
                         </td> 
                         <td class="align-middle"> 
-                             {{result.priceBeforeDDV}}
+                            Вкупна цена без ддв
                         </td> 
                         <td class="align-middle btn-action">  
-                            Вкупнo ддв
+                            
                         </td> 
                         <td class="align-middle btn-action">  
-                            {{result.priceAfterDDV}}
+                            {{result.priceBeforeDDV}} Денари
                         </td> 
                       </tr>  
-                </ng-container> 
+                      <tr class="list-group list-group-flush">   
+                        <td class="align-middle">
+                              
+                        </td>  
+                        <td class="align-middle">
+                             
+                        </td> 
+                        <td class="align-middle">
+                            
+                        </td> 
+                        <td class="align-middle">
+                            
+                        </td> 
+                        <td class="align-middle">
+                            
+                        </td>  
+                        <td class="align-middle" colspan="2">  
+                            Вкупнo ддв
+                        </td>  
+                        <td class="align-middle btn-action">  
+                            {{result.priceAfterDDV}} Денари
+                        </td> 
+                      </tr>  
+                      <tr class="list-group list-group-flush">   
+                        <td class="align-middle">
+                              
+                        </td>  
+                        <td class="align-middle">
+                             
+                        </td> 
+                        <td class="align-middle">
+                            
+                        </td> 
+                        <td class="align-middle">
+                            
+                        </td> 
+                        <td class="align-middle">
+                            
+                        </td>  
+                        <td class="align-middle" colspan="2">  
+                            Вкупна цена со ддв Денари
+                        </td>  
+                        <td class="align-middle btn-action">  
+                            {{result.priceAfterDDV + result.priceBeforeDDV}} 
+                        </td> 
+                      </tr>    
            
             
         </tbody>
@@ -140,3 +183,30 @@
         </div>
     </div>
 </form> 
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6"></div>
+        <div class="col-md-6">
+            <form class="example-form" [formGroup]="formEndResult" name="edit-product" (ngSubmit)="submitEndResult()">  
+    
+
+                <div class="form-group">
+                    <label for="priceAfterLicitation"> Внесете која е цената после лицитацијата односно јавното наддавање</label>
+                    <input 
+                    id="priceAfterLicitation"
+                    type="number" 
+                    formControlName="priceAfterLicitation"
+                   class="form-control" 
+                   placeholder="вкупна цена без ддв"
+                   title="Вкупната цена на ставката без вклучено ддв"
+                     /> 
+                </div>
+                <button class="btn btn-success" type="button" (click)="priceAfterLicitation()">Пресметај по крајна цена</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+ 

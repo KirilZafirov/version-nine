@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
-import { map, filter } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { map, filter, debounce, debounceTime, tap, takeUntil } from 'rxjs/operators';
+import { Observable, Subject } from 'rxjs';
 export interface EntryProduct { 
   subject: string;
   offeredGoods: string;
@@ -27,7 +27,9 @@ export interface SelectOption {
 export class CalculationsComponent implements OnInit {
 
   dynamicForm: FormGroup; 
+  formEndResult: FormGroup;
 
+  destroy$ = new Subject();
   measureAndAmount: SelectOption[] = [
     {
       display: 'Килограм',
@@ -57,14 +59,23 @@ export class CalculationsComponent implements OnInit {
     this.dynamicForm = this.formBuilder.group({
       items: new FormArray([this.getNewItemControl()])
   });
+  this.formEndResult = this.formBuilder.group({
+    priceAfterLicitation : [null]
+});
   }
    
-  result$: Observable<Result>;
+  result: Result = {
+    priceBeforeDDV: 0,
+    priceAfterDDV: 0
+  };;
   ngOnInit() {
-    this.result$ = this.dynamicForm.valueChanges.pipe(
+    this.dynamicForm.valueChanges.pipe(
       filter(() => this.dynamicForm.valid),
-      map((listOfProducts) => this.calculateResult(listOfProducts.items))
-    );
+      map((listOfProducts) => this.calculateResult(listOfProducts.items)),
+      takeUntil(this.destroy$)
+    ).subscribe((result: Result) => {
+      this.result = result;
+    }); 
   }
   
   calculateResult(listOfProducts: EntryProduct[]): Result { 
@@ -95,7 +106,7 @@ export class CalculationsComponent implements OnInit {
       subject: [''],
       priceBeforeTax: [null, Validators.required],
       measureAndAmount: ['kg' , Validators.required],
-      ddvRate: [0.18 , Validators.required],
+      ddvRate: [0.05 , Validators.required],
       totalRequired: [null , Validators.required]
     });
   }
@@ -110,6 +121,23 @@ export class CalculationsComponent implements OnInit {
   get formItems() { return this.dynamicForm.controls; }
   get items() { return this.formItems.items as FormArray; } 
 
+  priceAfterLicitation(){
+    this.items.controls.forEach(f => {
+      const percent = this.calculateReducerPercent(this.formEndResult.get('priceAfterLicitation').value);
+      const nextValue = this.calculateReducedValue(f.get('priceBeforeTax').value, percent);
+      f.get('priceBeforeTax').patchValue(nextValue);
+    })
+  }
+
+  calculateReducerPercent(finalValue: number) { 
+    const result = this.result.priceBeforeDDV - finalValue;
+    return result / this.result.priceBeforeDDV;
+  }
+
+  calculateReducedValue(value: number , percent: number) { 
+    return value - (value * percent);
+  }
+
   onSubmit() { 
 
       // stop here if form is invalid
@@ -121,9 +149,26 @@ export class CalculationsComponent implements OnInit {
       alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.dynamicForm.value, null, 4));
   }
 
+  submitEndResult() {
+     // stop here if form is invalid
+     if (this.formEndResult.invalid) {
+      return;
+  }
+
+  // display form values on success
+  alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.formEndResult.value, null, 4));
+  }
+
+
   onReset() {
       // reset whole form back to initial state 
       this.dynamicForm.reset();
       this.items.clear();
+  }
+
+  
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }
