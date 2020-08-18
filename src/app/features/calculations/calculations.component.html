@@ -66,10 +66,22 @@
                 </select>
                     </td>
                     <td class="align-middle">
-                        Вкупна цена без ддв 
+                        <input type="number" 
+                        [value]="item.get('priceBeforeTax').value * item.get('totalRequired').value" 
+                        class="form-control" 
+                        placeholder="вкупна цена без ддв"
+                        disabled
+                        title="Вкупната цена на ставката без вклучено ддв"
+                          /> 
                     </td> 
                     <td class="align-middle">
-                        Вкупна ддв 
+                        <input type="number" 
+                        [value]="item.get('priceBeforeTax').value * item.get('totalRequired').value * item.get('ddvRate').value"
+                        class="form-control" 
+                        placeholder="вкупнo ддв"
+                        disabled
+                        title="Вкупно ддв"
+                          /> 
                     </td>   
                     <td class="align-middle btn-action">  
                         <button class="btn btn-danger" type="button" (click)="remove(i)">Избриши 
@@ -105,7 +117,7 @@
                      
                 </td> 
               </tr>   -->
-            <ng-container *ngIf="dynamicForm.valid">
+            
                 <ng-container *ngIf="result$ | async as result">
                     <tr class="list-group list-group-flush">  
                    
@@ -134,8 +146,7 @@
                             {{result.priceAfterDDV}}
                         </td> 
                       </tr>  
-                </ng-container>
-            </ng-container>
+                </ng-container> 
            
             
         </tbody>

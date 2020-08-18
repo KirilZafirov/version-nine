@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
-import { map } from 'rxjs/operators';
+import { map, filter } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 export interface EntryProduct { 
   subject: string;
@@ -42,6 +42,7 @@ export class CalculationsComponent implements OnInit {
       value: 'br'
     }
   ];
+
   ddvRate: SelectOption[] = [
     {
       display: '5%',
@@ -61,30 +62,26 @@ export class CalculationsComponent implements OnInit {
   result$: Observable<Result>;
   ngOnInit() {
     this. result$ = this.dynamicForm.valueChanges.pipe(
+      filter(() => this.dynamicForm.valid),
       map((listOfProducts: EntryProduct[]) => this.calculateResult(listOfProducts))
     );
   }
  
-
-  calculateResult(listOfProducts: EntryProduct[]):Result {
-   
-    const summary = listOfProducts.reduce((acc, value, index) => {
-      acc += +value;
-      return 0
-    }, 0);
-
+  totalSum: number = 0;
+  totalTax: number = 0;
+  calculateResult(listOfProducts: EntryProduct[]):Result { 
     return {
       priceBeforeDDV: 0,
       priceAfterDDV: 0
     }
   }
 
-  calculateSingle(product: EntryProduct):Result {
+  calculateSingle(product: EntryProduct) {
     const priceBeforeDDVForAll = product.priceBeforeTax * product.totalRequired;
     const taxDiff = priceBeforeDDVForAll * product.ddvRate;
     return {
       priceBeforeDDV: priceBeforeDDVForAll,
-      priceAfterDDV: product.priceBeforeTax + taxDiff
+      priceAfterDDV: taxDiff
     }
   }
 
@@ -94,7 +91,7 @@ export class CalculationsComponent implements OnInit {
       priceBeforeTax: [null, Validators.required],
       measureAndAmount: ['kg' , Validators.required],
       ddvRate: [0.18 , Validators.required],
-      totalRequired: [null , Validators.required],
+      totalRequired: [null , Validators.required]
     });
   }
 
