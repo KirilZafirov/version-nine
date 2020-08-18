@@ -61,19 +61,24 @@ export class CalculationsComponent implements OnInit {
    
   result$: Observable<Result>;
   ngOnInit() {
-    this. result$ = this.dynamicForm.valueChanges.pipe(
+    this.result$ = this.dynamicForm.valueChanges.pipe(
       filter(() => this.dynamicForm.valid),
-      map((listOfProducts: EntryProduct[]) => this.calculateResult(listOfProducts))
+      map((listOfProducts) => this.calculateResult(listOfProducts.items))
     );
   }
- 
-  totalSum: number = 0;
-  totalTax: number = 0;
-  calculateResult(listOfProducts: EntryProduct[]):Result { 
-    return {
+  
+  calculateResult(listOfProducts: EntryProduct[]): Result { 
+    let start = {
       priceBeforeDDV: 0,
       priceAfterDDV: 0
-    }
+    };
+   listOfProducts.map((item) => {
+      const calculation = this.calculateSingle(item);
+      start.priceAfterDDV += calculation.priceAfterDDV;
+      start.priceBeforeDDV += calculation.priceBeforeDDV; 
+    });
+
+    return start;
   }
 
   calculateSingle(product: EntryProduct) {

@@ -3,6 +3,17 @@
         <h5 class="card-header">Пример пресметка</h5> 
     <table class="table table-hover">
         <thead>
+            <tr class="bg-info"> 
+                <th scope="col"></th>
+                <th scope="col">1</th> 
+                <th scope="col">2</th>
+                <th scope="col">3</th>
+                <th scope="col">4</th>
+                <th scope="col">5</th> 
+                <th scope="col">6</th> 
+                <th scope="col">7</th> 
+                <th scope="col" class="btn-action"></th>
+              </tr>
           <tr class="bg-info"> 
             <th scope="col">#</th>
             <th scope="col">Вид и опис на стока</th> 
@@ -88,35 +99,7 @@
                         </button> 
                     </td> 
                   </tr>  
-            </ng-container > 
-
-            <!-- <tr class="list-group list-group-flush">  
-               
-                <td class="align-middle">
-                      
-                </td>  
-                <td class="align-middle">
-                     
-                </td> 
-                <td class="align-middle">
-                    
-                </td> 
-                <td class="align-middle">  
-                        
-                </td> 
-                <td class="align-middle">
-                    Вкупна цена без ддв
-                </td> 
-                <td class="align-middle"> 
-                    
-                </td> 
-                <td class="align-middle btn-action">  
-                    Вкупна цена со ддв
-                </td> 
-                <td class="align-middle btn-action">  
-                     
-                </td> 
-              </tr>   -->
+            </ng-container >  
             
                 <ng-container *ngIf="result$ | async as result">
                     <tr class="list-group list-group-flush">  
@@ -140,7 +123,7 @@
                              {{result.priceBeforeDDV}}
                         </td> 
                         <td class="align-middle btn-action">  
-                            Вкупна цена со ддв
+                            Вкупнo ддв
                         </td> 
                         <td class="align-middle btn-action">  
                             {{result.priceAfterDDV}}
