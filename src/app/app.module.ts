@@ -1,3 +1,5 @@
+import { SharedModule } from './shared/shared.module';
+import { CoreModule } from './core/core.module';
 import { AppInitService } from './app.init';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, APP_INITIALIZER } from '@angular/core';
@@ -18,6 +20,8 @@ export function init_app(appLoadService: AppInitService) {
   imports: [
     BrowserModule,
     AppRoutingModule,
+    SharedModule,
+    CoreModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [
